@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LogIn, UserPlus, Eye, EyeOff } from 'lucide-react';
+import { LogIn, UserPlus, Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const API_URL = 'http://localhost:8000';
@@ -31,7 +31,7 @@ export default function Auth() {
             toast.success('¡Sesión iniciada correctamente!');
             setTimeout(() => {
                 navigate('/');
-                window.location.reload(); // Refresh to update Layout user state
+                window.location.reload();
             }, 1000);
         } catch (err) {
             let errorMsg = "Credenciales incorrectas o error de conexión.";
@@ -73,32 +73,44 @@ export default function Auth() {
     };
 
     return (
-        <div className="flex-center animate-fade-in" style={{ padding: '2rem', minHeight: '80vh' }}>
-            <div className="glass-panel" style={{ width: '100%', maxWidth: '400px', padding: '2.5rem' }}>
-                <h2 className="text-gradient text-center" style={{ fontSize: '2rem', marginBottom: '2rem' }}>
-                    {isLogin ? 'Iniciar Sesión' : 'Registro'}
-                </h2>
+        <div className="container animate-up" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="glass-card" style={{ width: '100%', maxWidth: '440px', padding: '48px 32px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+                    <div style={{ background: 'rgba(0, 113, 227, 0.1)', width: '64px', height: '64px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto' }}>
+                        {isLogin ? <LogIn color="var(--accent-blue)" size={32} /> : <UserPlus color="var(--accent-blue)" size={32} />}
+                    </div>
+                    <h2 style={{ fontSize: '32px', marginBottom: '8px', color: '#fff' }}>
+                        {isLogin ? 'Bienvenido' : 'Crear Cuenta'}
+                    </h2>
+                    <p style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>
+                        {isLogin ? 'Ingresa tus credenciales para continuar.' : 'Únete a nuestra comunidad universitaria.'}
+                    </p>
+                </div>
 
-                <a href={GOOGLE_START_URL} className="btn w-full mb-4" style={{ background: 'white', color: '#333', border: '1px solid #ddd', display: 'flex', justifyContent: 'center' }}>
-                    <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style={{ marginRight: '8px' }}>
+                <a href={GOOGLE_START_URL} className="apple-btn apple-btn-secondary" style={{ width: '100%', marginBottom: '24px', gap: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <path fill="#EA4335" d="M9 3.48c1.69 0 2.84.73 3.49 1.34l2.37-2.3C13.55.93 11.43 0 9 0 5.48 0 2.44 2.02 1 4.96l2.88 2.24C4.55 5.08 6.62 3.48 9 3.48z" />
                         <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.18-1.84H9v3.48h4.84c-.21 1.12-.84 2.07-1.79 2.71v2.25h2.9c1.7-1.57 2.69-3.89 2.69-6.6z" />
                         <path fill="#FBBC05" d="M3.88 10.84A5.41 5.41 0 0 1 3.56 9c0-.64.11-1.26.31-1.84L1 4.96A9 9 0 0 0 0 9c0 1.43.34 2.79.94 4l2.94-2.16z" />
                         <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.25c-.8.54-1.82.86-3.06.86-2.35 0-4.33-1.59-5.04-3.73L1 13.04C2.44 15.98 5.48 18 9 18z" />
                     </svg>
-                    Continuar con Google
+                    <span style={{ color: '#fff' }}>Continuar con Google</span>
                 </a>
 
-                <div className="text-center text-muted mb-4" style={{ fontSize: '0.9rem' }}>
-                    o usa tu correo institucional
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+                    <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
+                    <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500 }}>o usa tu cuenta</span>
+                    <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
                 </div>
 
-                <form onSubmit={isLogin ? handleLogin : handleRegister}>
-                    <div className="form-group">
+                <form onSubmit={isLogin ? handleLogin : handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <div style={{ position: 'relative' }}>
+                        <User size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
                         <input
                             className="form-input"
+                            style={{ paddingLeft: '44px' }}
                             type="text"
-                            placeholder="Nombre de usuario"
+                            placeholder="Usuario"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
@@ -106,9 +118,11 @@ export default function Auth() {
                     </div>
 
                     {!isLogin && (
-                        <div className="form-group">
+                        <div style={{ position: 'relative' }}>
+                            <Mail size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
                             <input
                                 className="form-input"
+                                style={{ paddingLeft: '44px' }}
                                 type="email"
                                 placeholder="Correo institucional"
                                 value={email}
@@ -118,25 +132,29 @@ export default function Auth() {
                         </div>
                     )}
 
-                    <div className="form-group" style={{ position: 'relative' }}>
+                    <div style={{ position: 'relative' }}>
+                        <Lock size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
                         <input
                             className="form-input"
+                            style={{ paddingLeft: '44px', paddingRight: '44px' }}
                             type={showPassword ? "text" : "password"}
                             placeholder="Contraseña"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>
+                        <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)' }}>
                             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
                     </div>
 
                     {!isLogin && (
                         <>
-                            <div className="form-group">
+                            <div style={{ position: 'relative' }}>
+                                <Lock size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
                                 <input
                                     className="form-input"
+                                    style={{ paddingLeft: '44px' }}
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Confirmar contraseña"
                                     value={passwordConfirm}
@@ -144,9 +162,14 @@ export default function Auth() {
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label className="form-label text-muted" style={{ fontSize: '0.9rem' }}>Facultad</label>
-                                <select className="form-select" value={faculty} onChange={(e) => setFaculty(e.target.value)}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', marginLeft: '4px' }}>Facultad</label>
+                                <select
+                                    className="form-input"
+                                    style={{ appearance: 'none', background: '#1c1c1e url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%2386868b\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'m3 4 3 3 3-3\'/%3E%3C/svg%3E") no-repeat right 16px center' }}
+                                    value={faculty}
+                                    onChange={(e) => setFaculty(e.target.value)}
+                                >
                                     <option value="FI">Ingeniería</option>
                                     <option value="FCA">Contaduría y Adm.</option>
                                     <option value="FC">Ciencias</option>
@@ -165,18 +188,17 @@ export default function Auth() {
                         </>
                     )}
 
-                    <button type="submit" className="btn btn-primary w-full" disabled={isLoading} style={{ marginTop: '1rem' }}>
-                        {isLoading ? 'Cargando...' : isLogin ? <><LogIn size={18} /> Entrar</> : <><UserPlus size={18} /> Registrarse</>}
+                    <button type="submit" className="apple-btn apple-btn-primary" disabled={isLoading} style={{ width: '100%', marginTop: '16px', height: '48px', fontSize: '16px', fontWeight: 600 }}>
+                        {isLoading ? 'Cargando...' : isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
                     </button>
                 </form>
 
-                <div className="text-center mt-4" style={{ marginTop: '1.5rem' }}>
+                <div style={{ textAlign: 'center', marginTop: '32px' }}>
                     <button
                         onClick={() => setIsLogin(!isLogin)}
-                        className="text-muted"
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent-blue)', fontWeight: 500, fontSize: '15px' }}
                     >
-                        {isLogin ? "¿No tienes cuenta? Regístrate aquí" : "¿Ya tienes cuenta? Inicia sesión"}
+                        {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Entra"}
                     </button>
                 </div>
             </div>

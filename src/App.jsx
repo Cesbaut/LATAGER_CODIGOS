@@ -11,6 +11,7 @@ import EvidenceRating from './views/EvidenceRating';
 import Auth from './views/Auth';
 import GoogleCallbackPage from './views/GoogleCallbackPage';
 import SetUsername from './views/SetUsername';
+import MyDonations from './views/MyDonations';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
             <Route path="autenticacion" element={<Auth />} />
             <Route path="autenticacion/google_callback_backend" element={<GoogleCallbackPage />} />
             <Route path="set-username" element={<SetUsername />} />
+            <Route path="mis-donaciones" element={<MyDonations user={user} />} />
           </Route>
         </Routes>
       </BrowserRouter>
