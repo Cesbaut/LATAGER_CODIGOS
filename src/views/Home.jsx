@@ -52,11 +52,11 @@ export default function Home({ user }) {
 
             {/* Hero Section */}
             <section style={{
-                padding: '120px 24px 80px',
+                padding: 'var(--hero-padding, 120px 24px 80px)',
                 textAlign: 'center',
                 maxWidth: '1000px',
                 margin: '0 auto'
-            }} className="animate-up">
+            }} className="animate-up hero-section">
                 <span style={{
                     color: '#ffd60a',
                     fontSize: '14px',
@@ -69,17 +69,17 @@ export default function Home({ user }) {
                     Potenciando la comunidad UNAM
                 </span>
                 <h1 style={{
-                    fontSize: 'clamp(40px, 8vw, 72px)',
-                    fontWeight: 700,
-                    lineHeight: 1.05,
+                    fontSize: 'clamp(32px, 10vw, 64px)',
+                    fontWeight: 800,
+                    lineHeight: 1.1,
                     marginBottom: '24px',
-                    letterSpacing: '-0.03em'
+                    letterSpacing: '-0.04em'
                 }}>
                     Comparte. Ayuda.<br />
                     <span style={{ color: '#86868b' }}>Ningún código se desperdicia.</span>
                 </h1>
                 <p style={{
-                    fontSize: '20px',
+                    fontSize: 'clamp(16px, 4vw, 20px)',
                     color: '#86868b',
                     maxWidth: '600px',
                     margin: '0 auto 48px',
@@ -88,11 +88,11 @@ export default function Home({ user }) {
                     La plataforma oficial para compartir beneficios alimentarios entre estudiantes.
                     Seguro, rápido y completamente gratuito.
                 </p>
-                <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <Link to="/donar" className="apple-btn" style={{ background: 'var(--accent-donor)', color: '#fff', padding: '16px 40px', fontSize: '17px', borderRadius: '40px', fontWeight: 600 }}>
+                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', flexDirection: 'column', alignItems: 'center' }} className="mobile-stack">
+                    <Link to="/donar" className="apple-btn" style={{ background: 'var(--accent-donor)', color: '#fff', padding: '16px 40px', fontSize: '17px', borderRadius: '40px', fontWeight: 600, width: '100%', maxWidth: '300px' }}>
                         Donar Código
                     </Link>
-                    <a href="#explore" className="apple-btn apple-btn-secondary" style={{ padding: '16px 40px', fontSize: '17px', borderRadius: '40px' }}>
+                    <a href="#explore" className="apple-btn apple-btn-secondary" style={{ padding: '16px 40px', fontSize: '17px', borderRadius: '40px', width: '100%', maxWidth: '300px' }}>
                         Explorar Comedores
                     </a>
                 </div>
@@ -102,17 +102,17 @@ export default function Home({ user }) {
             <div id="explore" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
 
                 {/* How it Works Section */}
-                <section style={{ padding: '80px 24px 40px' }}>
+                <section style={{ padding: '60px 20px 40px' }}>
                     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-                            <h2 style={{ fontSize: '42px', fontWeight: 800, letterSpacing: '-0.04em', marginBottom: '16px', color: '#fff' }}>¿Cómo empezar?</h2>
-                            <p style={{ color: '#86868b', fontSize: '18px' }}>Elige tu rol en la comunidad y conoce el proceso.</p>
+                        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                            <h2 style={{ fontSize: 'clamp(28px, 8vw, 42px)', fontWeight: 800, letterSpacing: '-0.04em', marginBottom: '16px', color: '#fff' }}>¿Cómo empezar?</h2>
+                            <p style={{ color: '#86868b', fontSize: '17px' }}>Elige tu rol en la comunidad y conoce el proceso.</p>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '32px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                             {/* Donor Path */}
                             <div className="glass-card animate-up" style={{
-                                padding: '40px',
+                                padding: 'var(--card-padding, 40px)',
                                 background: 'rgba(255, 255, 255, 0.03)',
                                 border: '1px solid rgba(255, 255, 255, 0.08)',
                                 borderRadius: '32px',
@@ -127,7 +127,7 @@ export default function Home({ user }) {
                                     <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#fff' }}>Soy Donador</h3>
                                 </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                     <div style={{ display: 'flex', gap: '12px' }}>
                                         <div style={{ color: 'var(--accent-donor)', fontWeight: 800 }}>01</div>
                                         <p style={{ color: '#86868b', fontSize: '15px', margin: 0 }}>Toma foto al código QR de tu charola.</p>
@@ -200,7 +200,7 @@ export default function Home({ user }) {
                             <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#ffd60a', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '12px' }}>Listas de Espera en Tiempo Real</h3>
                             <p style={{ color: '#fff', fontSize: '24px', fontWeight: 700 }}>Selecciona un comedor para empezar</p>
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
                             {COMEDOR_STYLES.map((c, i) => (
                                 <Link key={c.slug} to={`/codigos/${c.slug}`} style={{ textDecoration: 'none' }}>
                                     <div className="glass-card" style={{

@@ -39,6 +39,15 @@
   --radius-full: 9999px;
 
   --nav-height: 64px;
+  --hero-padding: 120px 24px 80px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 56px;
+    --hero-padding: 60px 20px 40px;
+    --card-padding: 20px;
+  }
 }
 
 * {
@@ -47,6 +56,19 @@
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mobile-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (min-width: 769px) {
+  .mobile-stack {
+    flex-direction: row !important;
+  }
 }
 
 body {
@@ -96,11 +118,21 @@ h4 {
 .nav-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.desktop-only {
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
 }
 
 .nav-link {
@@ -270,5 +302,58 @@ h4 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Base Responsive Queries */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  h1 {
+    font-size: 32px !important;
+  }
+
+  h2 {
+    font-size: 28px !important;
+  }
+
+  /* Stack elements that are normally side-by-side */
+  .mobile-stack {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  /* Specific scaling for heavy text sections */
+  .hero-section h1 {
+    font-size: clamp(32px, 12vw, 48px) !important;
+  }
+
+  .hero-section p {
+    font-size: 16px !important;
+    padding: 0 10px;
+  }
+
+  /* Ensure cards take full width on mobile */
+  .glass-card {
+    border-radius: 20px;
+    padding: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .apple-btn {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .nav-content {
+    padding: 0 16px;
+  }
+
+  .stat-pill {
+    font-size: 12px;
+    padding: 4px 12px;
   }
 }

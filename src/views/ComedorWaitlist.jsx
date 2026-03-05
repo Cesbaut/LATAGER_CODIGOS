@@ -68,7 +68,7 @@ export default function ComedorWaitlist({ user }) {
         <div className="container animate-up" style={{ maxWidth: '800px', margin: '0 auto' }}>
 
             {/* Header Card */}
-            <div className="glass-card" style={{ padding: '48px 32px', textAlign: 'center', marginBottom: '24px' }}>
+            <div className="glass-card" style={{ padding: 'var(--hero-padding)', textAlign: 'center', marginBottom: '24px' }}>
                 <h1 style={{ fontSize: '44px', marginBottom: '12px', fontWeight: 800, letterSpacing: '-0.03em' }}>
                     Comedor {comedorName}
                 </h1>

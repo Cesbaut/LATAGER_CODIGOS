@@ -36,7 +36,7 @@ export default function Layout({ user }) {
                             }}>LaTaGer</span>
                         </Link>
 
-                        <nav className="nav-links" style={{ display: 'flex', gap: '24px' }}>
+                        <nav className="nav-links desktop-only" style={{ display: 'flex', gap: '24px' }}>
                             <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
                                 Inicio
                             </Link>
@@ -52,19 +52,19 @@ export default function Layout({ user }) {
                         </nav>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                         {user ? (
                             <>
                                 <Link to="/turno" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <QrCode size={18} />
-                                    <span>Mi Turno</span>
+                                    <span className="desktop-only">Mi Turno</span>
                                 </Link>
                                 <Link to="/mis-donaciones" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <Gift size={18} />
-                                    <span>Donar</span>
+                                    <span className="desktop-only">Donar</span>
                                 </Link>
-                                <div style={{ width: '1px', height: '20px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
-                                <Link to={`/usuario/${user.username}`} className="apple-btn apple-btn-secondary" style={{ padding: '8px 16px', fontSize: '13px' }}>
+                                <div className="desktop-only" style={{ width: '1px', height: '20px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+                                <Link to={`/usuario/${user.username}`} className="apple-btn apple-btn-secondary" style={{ padding: '8px 16px', fontSize: '12px' }}>
                                     <UserIcon size={14} />
                                     <span>{user.username}</span>
                                 </Link>
@@ -80,8 +80,8 @@ export default function Layout({ user }) {
                                 </button>
                             </>
                         ) : (
-                            <Link to="/autenticacion" className="apple-btn apple-btn-primary" style={{ padding: '10px 24px', fontSize: '14px', fontWeight: 600 }}>
-                                <LogIn size={16} />
+                            <Link to="/autenticacion" className="apple-btn apple-btn-primary" style={{ padding: '8px 20px', fontSize: '13px', fontWeight: 600 }}>
+                                <LogIn size={15} />
                                 <span>Entrar</span>
                             </Link>
                         )}

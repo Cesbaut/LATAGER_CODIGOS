@@ -107,8 +107,8 @@ export default function MyDonations({ user }) {
     );
 
     return (
-        <div className="container animate-up" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <header style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <div className="container animate-up" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <header style={{ textAlign: 'center', padding: 'var(--hero-padding)', marginBottom: '32px' }}>
                 <div style={{ background: 'var(--accent-donor-glass)', width: '80px', height: '80px', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px auto' }}>
                     <Gift size={40} color="var(--accent-donor)" />
                 </div>
@@ -229,7 +229,7 @@ export default function MyDonations({ user }) {
                                         )}
                                     </div>
 
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '240px' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%', maxWidth: '240px' }}>
                                         <div>
                                             <p style={{ fontSize: '11px', fontWeight: 800, marginBottom: '12px', textAlign: 'center', color: 'var(--text-secondary)', letterSpacing: '0.1em' }}>QR SUBIDO</p>
                                             <img src={formatImageUrl(don.image)} alt="QR" style={{ width: '100%', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', padding: '6px', background: '#fff' }} />

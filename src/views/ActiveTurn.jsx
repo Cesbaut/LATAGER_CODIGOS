@@ -272,8 +272,8 @@ export default function ActiveTurn({ user }) {
     }
 
     return (
-        <div className="container animate-up" style={{ maxWidth: '800px', margin: '40px auto' }}>
-            <header style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <div className="container animate-up" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <header style={{ textAlign: 'center', padding: 'var(--hero-padding)', marginBottom: '32px' }}>
                 <h1 style={{ fontSize: '48px', fontWeight: 800, letterSpacing: '-0.05em', color: '#fff', marginBottom: '12px' }}>
                     Tus Beneficios
                 </h1>
