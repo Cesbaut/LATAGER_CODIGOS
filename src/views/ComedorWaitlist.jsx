@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Users, AlertTriangle, Loader2, Gift, Send, CheckCircle, Clock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { requestNotificationPermission } from '../utils/notifications';
 
 export default function ComedorWaitlist({ user }) {
     const { comedor } = useParams();
@@ -39,6 +40,8 @@ export default function ComedorWaitlist({ user }) {
             await axios.post('http://localhost:8000/api/codigos/waitlist/', { comedor: comedorName }, {
                 headers: { Authorization: `Token ${token}` }
             });
+            // Request notification permission right when joining
+            requestNotificationPermission();
             await fetchQueue();
         } catch (e) {
             const errorMsg = e.response?.data?.[0] || e.response?.data?.error || "Error al unirse a la fila";

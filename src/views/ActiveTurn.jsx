@@ -3,6 +3,7 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
 import { Timer, CheckCircle, Phone, MapPin, Star, Trophy, Download, Loader2, XCircle, Clock, ChevronRight, Layers } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { requestNotificationPermission, sendBrowserNotification } from '../utils/notifications';
 
 const API_URL = 'http://localhost:8000';
 
@@ -198,7 +199,13 @@ function TurnCard({ initialStatus, fetchAllStatuses, handleDownload }) {
 export default function ActiveTurn({ user }) {
     const [statuses, setStatuses] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const notifiedIds = React.useRef(new Set());
     const navigate = useNavigate();
+
+    // Request permission on mount
+    useEffect(() => {
+        requestNotificationPermission();
+    }, []);
 
     const fetchStatuses = async () => {
         if (!user) return;
@@ -208,7 +215,20 @@ export default function ActiveTurn({ user }) {
                 headers: { Authorization: `Token ${token}` }
             });
             // res.data is now an array
-            setStatuses(Array.isArray(res.data) ? res.data : [res.data]);
+            const currentStatuses = Array.isArray(res.data) ? res.data : [res.data];
+            setStatuses(currentStatuses);
+
+            // Trigger browser notifications for newly Notified statuses
+            currentStatuses.forEach(s => {
+                if (s.status === 'Notified' && !notifiedIds.current.has(s.id)) {
+                    sendBrowserNotification(`¡Tu turno en ${s.comedor} está listo!`, {
+                        body: 'Tienes 10 minutos para aceptar tu código. ¡Corre!',
+                        tag: `turn-ready-${s.id}`,
+                        renotify: true
+                    });
+                    notifiedIds.current.add(s.id);
+                }
+            });
         } catch (err) {
             console.error("Error fetching status", err);
             if (err.response?.status === 404) {
