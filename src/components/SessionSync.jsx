@@ -24,11 +24,13 @@ const SessionSync = () => {
                 }
                 
                 // Sincronización Negativa: Se cerró sesión de forma GLOBAL
-                // Solo actuamos si nosotros teníamos sesión y el centro dice que ya no existe
+                // ⚠️ Por ahora desactivado para evitar borrado accidental por bloqueos de privacidad
+                /*
                 if (status === 'none' && localToken) {
                     localStorage.removeItem('authToken');
                     window.location.reload();
                 }
+                */
             }
         };
 
