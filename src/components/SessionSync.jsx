@@ -14,13 +14,18 @@ const SessionSync = () => {
             if (type === 'SESSION_STATUS') {
                 const localToken = localStorage.getItem('authToken');
 
-                // Solo sincronizar si hay una sesión activa nueva o diferente
+                // Sincronización Positiva: Se inició sesión en otro sitio
                 if (status === 'active' && token && localToken !== token) {
                     localStorage.setItem('authToken', token);
                     window.location.reload();
                 }
-                // NUNCA borrar sesión local ni reiniciar si status es 'none' 
-                // para evitar bucles infinitos por políticas de privacidad del navegador.
+                
+                // Sincronización Negativa: Se cerró sesión de forma GLOBAL
+                // Solo actuamos si nosotros teníamos sesión y el centro dice que ya no existe
+                if (status === 'none' && localToken) {
+                    localStorage.removeItem('authToken');
+                    window.location.reload();
+                }
             }
         };
 
