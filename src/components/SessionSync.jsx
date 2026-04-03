@@ -13,13 +13,13 @@ const SessionSync = () => {
             if (type === 'SESSION_STATUS') {
                 const localToken = localStorage.getItem('authToken');
 
-                if (status === 'none' && localToken) {
-                    localStorage.removeItem('authToken');
-                    window.location.reload();
-                } else if (status === 'active' && token && localToken !== token) {
+                // Solo sincronizar si hay una sesión activa nueva o diferente
+                if (status === 'active' && token && localToken !== token) {
                     localStorage.setItem('authToken', token);
                     window.location.reload();
                 }
+                // NUNCA borrar sesión local ni reiniciar si status es 'none' 
+                // para evitar bucles infinitos por políticas de privacidad del navegador.
             }
         };
 
