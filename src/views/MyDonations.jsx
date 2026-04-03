@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Gift, Clock, Star, AlertCircle, CheckCircle, Trash2, Camera } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export default function MyDonations({ user }) {
     const [donations, setDonations] = useState([]);

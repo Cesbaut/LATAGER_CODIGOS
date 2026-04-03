@@ -22,7 +22,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      axios.get('http://localhost:8000/api/codigos/me/', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      axios.get(`${apiUrl}/api/codigos/me/`, {
         headers: { Authorization: `Token ${token}` }
       })
         .then(res => {

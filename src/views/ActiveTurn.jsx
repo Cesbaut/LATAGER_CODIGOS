@@ -5,7 +5,7 @@ import { Timer, CheckCircle, Phone, MapPin, Star, Trophy, Download, Loader2, XCi
 import toast from 'react-hot-toast';
 import { requestNotificationPermission, sendBrowserNotification } from '../utils/notifications';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 function TurnCard({ initialStatus, fetchAllStatuses, handleDownload }) {
     const [status, setStatus] = useState(initialStatus);

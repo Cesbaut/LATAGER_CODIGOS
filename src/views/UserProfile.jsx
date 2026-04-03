@@ -3,7 +3,7 @@ import { useParams, Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
 import { Star, CheckCircle, Smartphone, GraduationCap, Link as LinkIcon, User, Award, MessageSquare } from 'lucide-react';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export default function UserProfile() {
     const { username } = useParams();

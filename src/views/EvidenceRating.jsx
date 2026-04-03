@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Camera, Star, Send, CheckCircle, Loader2, MessageSquare, Utensils } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export default function EvidenceRating() {
     const { donationId } = useParams();

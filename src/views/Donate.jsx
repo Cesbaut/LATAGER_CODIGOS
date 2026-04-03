@@ -34,8 +34,9 @@ export default function Donate({ user }) {
         if (phone) formData.append('phone', phone); // Optional
 
         const token = localStorage.getItem('authToken');
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
         try {
-            await axios.post('http://localhost:8000/api/codigos/donations/', formData, {
+            await axios.post(`${apiUrl}/api/codigos/donations/`, formData, {
                 headers: {
                     'Authorization': `Token ${token}`,
                     'Content-Type': 'multipart/form-data'

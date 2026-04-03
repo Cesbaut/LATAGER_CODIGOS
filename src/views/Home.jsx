@@ -42,7 +42,8 @@ export default function Home({ user }) {
     const [topDonors, setTopDonors] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/codigos/top-donors/')
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        axios.get(`${apiUrl}/api/codigos/top-donors/`)
             .then(res => setTopDonors(res.data))
             .catch(() => { });
     }, []);
