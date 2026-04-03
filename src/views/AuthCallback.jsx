@@ -14,8 +14,7 @@ const AuthCallback = () => {
             localStorage.setItem('authToken', token);
             toast.success("¡Sesión sincronizada!");
             setTimeout(() => {
-                navigate('/');
-                window.location.reload();
+                window.location.href = '/';
             }, 1000);
         } else {
             toast.error("Fallo al autenticar.");
