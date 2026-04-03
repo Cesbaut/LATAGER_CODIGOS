@@ -24,13 +24,10 @@ const SessionSync = () => {
                 }
                 
                 // Sincronización Negativa: Se cerró sesión de forma GLOBAL
-                // ⚠️ Por ahora desactivado para evitar borrado accidental por bloqueos de privacidad
-                /*
                 if (status === 'none' && localToken) {
                     localStorage.removeItem('authToken');
                     window.location.reload();
                 }
-                */
             }
         };
 
