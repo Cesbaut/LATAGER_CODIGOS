@@ -13,6 +13,9 @@ const SessionSync = () => {
 
             if (type === 'SESSION_STATUS') {
                 const localToken = localStorage.getItem('authToken');
+                const isCallbackPage = window.location.pathname.includes('auth-callback') || window.location.pathname.includes('autenticacion-callback');
+
+                if (isCallbackPage) return; // No sincronizar en páginas de retorno para evitar bucles
 
                 // Sincronización Positiva: Se inició sesión en otro sitio
                 if (status === 'active' && token && localToken !== token) {
