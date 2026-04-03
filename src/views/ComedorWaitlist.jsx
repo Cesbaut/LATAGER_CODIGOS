@@ -23,7 +23,8 @@ export default function ComedorWaitlist({ user }) {
     }, [comedorName]);
 
     const fetchQueue = async () => {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const isProd = window.location.hostname.includes('latager.com');
+        const apiUrl = import.meta.env.VITE_API_URL || (isProd ? 'https://cesbaut33.pythonanywhere.com' : 'http://localhost:8000');
         try {
             const res = await axios.get(`${apiUrl}/api/codigos/queue/${comedorName}/`);
             setWaitlist(res.data.waiting || []);
@@ -37,7 +38,8 @@ export default function ComedorWaitlist({ user }) {
         if (!user) { navigate('/autenticacion'); return; }
         setIsJoining(true);
         const token = localStorage.getItem('authToken');
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const isProd = window.location.hostname.includes('latager.com');
+        const apiUrl = import.meta.env.VITE_API_URL || (isProd ? 'https://cesbaut33.pythonanywhere.com' : 'http://localhost:8000');
         try {
             await axios.post(`${apiUrl}/api/codigos/waitlist/`, { comedor: comedorName }, {
                 headers: { Authorization: `Token ${token}` }
@@ -56,7 +58,8 @@ export default function ComedorWaitlist({ user }) {
     const leaveWaitlist = async () => {
         if (!window.confirm("¿Estás seguro de que deseas salir de la lista de espera?")) return;
         const token = localStorage.getItem('authToken');
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const isProd = window.location.hostname.includes('latager.com');
+        const apiUrl = import.meta.env.VITE_API_URL || (isProd ? 'https://cesbaut33.pythonanywhere.com' : 'http://localhost:8000');
         try {
             await axios.post(`${apiUrl}/api/codigos/waitlist/leave/`, { comedor: comedorName }, {
                 headers: { Authorization: `Token ${token}` }

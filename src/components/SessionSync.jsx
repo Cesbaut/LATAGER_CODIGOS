@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
-const AUTH_APP_URL = import.meta.env.VITE_AUTH_APP_URL || 'http://localhost:3000';
+const isProd = window.location.hostname.includes('latager.com');
+const AUTH_APP_URL = import.meta.env.VITE_AUTH_APP_URL || (isProd ? 'https://autenticacion.latager.com' : 'http://localhost:3000');
 const AUTH_APP_CHECK_URL = `${AUTH_APP_URL}/check-session`;
 
 const SessionSync = () => {

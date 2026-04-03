@@ -71,7 +71,8 @@ export default function Layout({ user }) {
                                 <button
                                     onClick={() => {
                                         localStorage.removeItem('authToken');
-                                        const authUrl = import.meta.env.VITE_AUTH_APP_URL || 'http://localhost:3000';
+                                        const isProd = window.location.hostname.includes('latager.com');
+                                        const authUrl = import.meta.env.VITE_AUTH_APP_URL || (isProd ? 'https://autenticacion.latager.com' : 'http://localhost:3000');
                                         window.location.href = `${authUrl}/logout?redirect_uri=${encodeURIComponent(window.location.origin)}`;
                                     }}
                                     className="apple-btn"

@@ -22,7 +22,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const isProd = window.location.hostname.includes('latager.com');
+      const apiUrl = import.meta.env.VITE_API_URL || (isProd ? 'https://cesbaut33.pythonanywhere.com' : 'http://localhost:8000');
       axios.get(`${apiUrl}/api/codigos/me/`, {
         headers: { Authorization: `Token ${token}` }
       })
