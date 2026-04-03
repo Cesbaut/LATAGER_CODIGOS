@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const AUTH_APP_URL = 'http://localhost:3000/login';
+const AUTH_APP_URL = `${import.meta.env.VITE_AUTH_APP_URL}/login`;
 
 export default function Auth() {
     useEffect(() => {
