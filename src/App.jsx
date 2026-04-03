@@ -9,10 +9,12 @@ import Donate from './views/Donate';
 import ActiveTurn from './views/ActiveTurn';
 import EvidenceRating from './views/EvidenceRating';
 import Auth from './views/Auth';
+import AuthCallback from './views/AuthCallback';
 import GoogleCallbackPage from './views/GoogleCallbackPage';
 import SetUsername from './views/SetUsername';
 import MyDonations from './views/MyDonations';
 import { Toaster } from 'react-hot-toast';
+import SessionSync from './components/SessionSync';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,6 +42,7 @@ function App() {
   return (
     <>
       <Toaster position="bottom-right" />
+      <SessionSync />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout user={user} />}>
@@ -50,6 +53,7 @@ function App() {
             <Route path="turno" element={<ActiveTurn user={user} />} />
             <Route path="evidencia/:donationId" element={<EvidenceRating user={user} />} />
             <Route path="autenticacion" element={<Auth />} />
+            <Route path="autenticacion-callback" element={<AuthCallback />} />
             <Route path="autenticacion/google_callback_backend" element={<GoogleCallbackPage />} />
             <Route path="set-username" element={<SetUsername />} />
             <Route path="mis-donaciones" element={<MyDonations user={user} />} />

@@ -71,7 +71,7 @@ export default function Layout({ user }) {
                                 <button
                                     onClick={() => {
                                         localStorage.removeItem('authToken');
-                                        window.location.reload();
+                                        window.location.href = `http://localhost:3000/logout?redirect_uri=${encodeURIComponent(window.location.origin)}`;
                                     }}
                                     className="apple-btn"
                                     style={{ padding: '8px', background: 'transparent', opacity: 0.6 }}
