@@ -82,13 +82,19 @@ export default function ComedorWaitlist({ user }) {
             <div id="center-content-column" className="container animate-up" style={{ width: '100%', maxWidth: '800px', margin: '0' }}>
 
                 {/* Header Card */}
-                <div className="glass-card" style={{ padding: 'var(--hero-padding)', textAlign: 'center', marginBottom: '24px' }}>
-                    <h1 style={{ fontSize: '44px', marginBottom: '12px', fontWeight: 800, letterSpacing: '-0.03em' }}>
+                <div className="glass-card" style={{ padding: 'var(--card-padding)', textAlign: 'center', marginBottom: '24px' }}>
+                    <h1 style={{ 
+                        fontSize: 'clamp(24px, 8vw, 44px)', 
+                        marginBottom: '12px', 
+                        fontWeight: 800, 
+                        letterSpacing: '-0.03em',
+                        lineHeight: '1.1'
+                    }}>
                         Comedor {comedorName}
                     </h1>
 
                     {/* Stats Pills */}
-                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '40px', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '32px', flexWrap: 'wrap' }}>
                         <span className="stat-pill">
                             <Users size={14} color="var(--text-secondary)" /> {waitlist.length} en espera
                         </span>
