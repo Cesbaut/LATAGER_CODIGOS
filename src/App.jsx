@@ -20,6 +20,14 @@ import SessionSync from './components/SessionSync';
 const isProd = window.location.hostname.includes('latager.com');
 const API_URL = import.meta.env.VITE_API_URL || (isProd ? 'https://cesbaut33.pythonanywhere.com' : 'http://localhost:8000');
 
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    return null;
+};
+
 const VisitTracker = () => {
     const location = useLocation();
     const path = location.pathname;
@@ -83,6 +91,7 @@ function App() {
       <Toaster position="bottom-right" />
       <SessionSync />
       <BrowserRouter>
+        <ScrollToTop />
         <VisitTracker />
         <Routes>
           <Route path="/" element={<Layout user={user} />}>

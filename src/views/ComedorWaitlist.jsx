@@ -73,7 +73,7 @@ export default function ComedorWaitlist({ user }) {
     const isUserNotified = waitlist.some(e => e.user.id === user?.id && e.status === 'Notified');
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'flex-start', padding: '0 20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'flex-start', padding: '40px 20px 80px 20px' }}>
             
             {/* Columna Lateral Izquierda (Espacio reservado) */}
             <div style={{ width: '280px' }} className="desktop-ad"></div>
@@ -82,7 +82,7 @@ export default function ComedorWaitlist({ user }) {
             <div id="center-content-column" className="container animate-up" style={{ width: '100%', maxWidth: '800px', margin: '0' }}>
 
                 {/* Header Card */}
-                <div className="glass-card" style={{ padding: 'var(--card-padding)', textAlign: 'center', marginBottom: '24px' }}>
+                <div className="glass-card" style={{ padding: '44px 32px', textAlign: 'center', marginBottom: '24px' }}>
                     <h1 style={{ 
                         fontSize: 'clamp(24px, 8vw, 44px)', 
                         marginBottom: '12px', 
