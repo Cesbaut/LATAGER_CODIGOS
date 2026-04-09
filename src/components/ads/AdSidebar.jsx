@@ -91,7 +91,7 @@ const SingleAd = ({ ad, sourceApp }) => {
     );
 };
 
-export default function AdSidebar({ sourceApp = 'latager_codigos' }) {
+export default function AdSidebar({ sourceApp = 'latager_codigos', onAdsCountChange }) {
     const [ads, setAds] = useState([]);
     const [visibleCount, setVisibleCount] = useState(1); // Mínimo 1
 
@@ -108,6 +108,16 @@ export default function AdSidebar({ sourceApp = 'latager_codigos' }) {
         };
         fetchAds();
     }, []);
+
+    // Solo mandamos al render los anuncios que caben visualmente y que NO se repitan
+    const adsToRender = ads.slice(0, visibleCount);
+
+    // Notificar al padre cuántos anuncios hay
+    useEffect(() => {
+        if (onAdsCountChange) {
+            onAdsCountChange(adsToRender.length);
+        }
+    }, [adsToRender.length, onAdsCountChange]);
 
     // Calcular cuántos anuncios caben en base a la altura del contenido central
     useEffect(() => {
@@ -140,9 +150,6 @@ export default function AdSidebar({ sourceApp = 'latager_codigos' }) {
     }, [ads]);
 
     if (ads.length === 0) return null;
-
-    // Solo mandamos al render los anuncios que caben visualmente y que NO se repitan
-    const adsToRender = ads.slice(0, visibleCount);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', width: '280px' }} className="desktop-ad">

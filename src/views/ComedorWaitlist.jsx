@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Users, AlertTriangle, Loader2, Gift, Send, CheckCircle, Clock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { requestNotificationPermission } from '../utils/notifications';
-import AdSidebar from '../components/ads/AdSidebar';
 
 export default function ComedorWaitlist({ user }) {
     const { comedor } = useParams();
@@ -76,8 +75,8 @@ export default function ComedorWaitlist({ user }) {
     return (
         <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'flex-start', padding: '0 20px' }}>
             
-            {/* Espaciador fantasma para forzar el centro perfecto */}
-            <div style={{ width: '280px', visibility: 'hidden' }} className="desktop-ad"></div>
+            {/* Columna Lateral Izquierda (Espacio reservado) */}
+            <div style={{ width: '280px' }} className="desktop-ad"></div>
 
             {/* Contenido Central */}
             <div id="center-content-column" className="container animate-up" style={{ width: '100%', maxWidth: '800px', margin: '0' }}>
@@ -269,8 +268,8 @@ export default function ComedorWaitlist({ user }) {
                 </div>
             </div>
 
-            {/* Ad Derecho Inteligente (No repite y respeta alto) */}
-            <AdSidebar sourceApp={`codigos_app_${comedorName.replace(/\s/g, '_').toLowerCase()}`} />
+            {/* Columna Lateral Derecha (Espacio reservado) */}
+            <div style={{ width: '280px' }} className="desktop-ad"></div>
 
             <style>{`
                 .desktop-ad { display: none; }
