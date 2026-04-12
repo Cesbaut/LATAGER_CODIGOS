@@ -54,12 +54,12 @@ const AdContainer = ({ sourceApp = 'latager_codigos' }) => {
             width: '100%',
             maxWidth: '280px',
             margin: '0 auto',
-            borderRadius: '16px',
+            borderRadius: '24px',
             overflow: 'hidden',
-            background: 'var(--bg-glass-layer)',
-            border: '1px solid rgba(255,255,255,0.05)',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+            transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease',
             cursor: currentAd.link ? 'pointer' : 'default'
         }}
         onMouseEnter={(e) => {
@@ -94,8 +94,7 @@ const AdContainer = ({ sourceApp = 'latager_codigos' }) => {
                 onClick={handleClick}
                 style={{ display: 'block', textDecoration: 'none' }}
             >
-                {/* paddingTop: 150% hace la imagen vertical estilo banner 2:3 en lugar de cuadrada 1:1 */}
-                <div style={{ position: 'relative', width: '100%', paddingTop: '150%', background: '#0a0a0a', display: 'flex', justifyContent: 'center' }}>
+                <div className="ad-image-wrapper">
                     <img
                         src={currentAd.imagen.startsWith('http')
                             ? currentAd.imagen
@@ -105,31 +104,69 @@ const AdContainer = ({ sourceApp = 'latager_codigos' }) => {
                             position: 'absolute',
                             top: 0, left: 0,
                             width: '100%', height: '100%',
-                            objectFit: 'contain', /* contain para mostrar la imagen completa al centro si no es misma escala */
+                            objectFit: 'contain',
                             backgroundColor: '#0a0a0a'
                         }}
                     />
                     {currentAd.link && (
-                        <div style={{
-                            position: 'absolute',
-                            bottom: 0, left: 0, right: 0,
-                            padding: '16px 12px',
-                            background: 'linear-gradient(to top, rgba(0,0,0,0.95), transparent)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '8px',
-                            color: 'white',
-                            fontSize: '15px',
-                            fontWeight: 700,
-                            opacity: 0.95
-                        }}>
-                            <ExternalLink size={18} />
-                            <span>Visitar</span>
+                        <div className="ad-overlay">
+                            {currentAd.descripcion && (
+                                <p className="ad-description">{currentAd.descripcion}</p>
+                            )}
+                            <div className="ad-visit-action">
+                                <ExternalLink size={18} />
+                                <span>Visitar</span>
+                            </div>
                         </div>
                     )}
                 </div>
             </a>
+
+            <style>{`
+                .ad-image-wrapper {
+                    position: relative;
+                    width: 100%;
+                    padding-top: 150%;
+                    background: #000;
+                    overflow: hidden;
+                }
+                .ad-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                    text-align: center;
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                    backdrop-filter: blur(4px);
+                    z-index: 5;
+                }
+                .ad-image-wrapper:hover .ad-overlay {
+                    opacity: 1;
+                }
+                .ad-description {
+                    font-size: 0.85rem;
+                    line-height: 1.4;
+                    margin-bottom: 15px;
+                    font-weight: 500;
+                }
+                .ad-visit-action {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-weight: 800;
+                    font-size: 0.95rem;
+                    background: var(--accent-primary, #0071e3);
+                    padding: 8px 16px;
+                    border-radius: 12px;
+                    color: black;
+                }
+            `}</style>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Users, AlertTriangle, Loader2, Gift, Send, CheckCircle, Clock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { requestNotificationPermission } from '../utils/notifications';
+import AdContainer from '../components/ads/AdContainer';
 
 export default function ComedorWaitlist({ user }) {
     const { comedor } = useParams();
@@ -76,7 +77,9 @@ export default function ComedorWaitlist({ user }) {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'flex-start', padding: '40px 20px 80px 20px' }}>
             
             {/* Columna Lateral Izquierda (Espacio reservado) */}
-            <div style={{ width: '280px' }} className="desktop-ad"></div>
+            <div style={{ width: '280px', position: 'sticky', top: '40px' }} className="desktop-ad">
+                <AdContainer sourceApp="latager_codigos_comedores" />
+            </div>
 
             {/* Contenido Central */}
             <div id="center-content-column" className="container animate-up" style={{ width: '100%', maxWidth: '800px', margin: '0' }}>
@@ -170,6 +173,11 @@ export default function ComedorWaitlist({ user }) {
                             </div>
                         </div>
                     )}
+                </div>
+
+                {/* Publicidad para Móviles */}
+                <div className="mobile-ad">
+                    <AdContainer sourceApp="latager_codigos_comedores_mobile" />
                 </div>
 
                 {/* In-Process */}
@@ -274,13 +282,21 @@ export default function ComedorWaitlist({ user }) {
                 </div>
             </div>
 
-            {/* Columna Lateral Derecha (Espacio reservado) */}
+            {/* Columna Lateral Derecha (Espacio reservado para balance) */}
             <div style={{ width: '280px' }} className="desktop-ad"></div>
 
             <style>{`
                 .desktop-ad { display: none; }
+                .mobile-ad { display: block; margin-bottom: 24px; }
+                
                 @media (min-width: 1250px) {
                     .desktop-ad { display: block; }
+                    .mobile-ad { display: none; }
+                }
+
+                @media (max-width: 768px) {
+                    .container { padding: 10px !important; }
+                    .stat-pill { font-size: 12px !important; }
                 }
             `}</style>
         </div>
