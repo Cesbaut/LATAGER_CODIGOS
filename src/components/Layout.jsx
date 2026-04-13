@@ -2,6 +2,8 @@ import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Utensils, QrCode, LogOut, LogIn, Gift, User as UserIcon } from 'lucide-react';
 
+import Logo from '../assets/lata';
+
 export default function Layout({ user }) {
     const location = useLocation();
     const COMEDORES = ['Pabellon', 'Cafe Terraza', 'Cafesin', 'Islas'];
@@ -15,25 +17,13 @@ export default function Layout({ user }) {
                             textDecoration: 'none',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '10px'
+                            gap: '12px'
                         }}>
-                            <div style={{
-                                background: '#ffd60a',
-                                borderRadius: '8px',
-                                width: '32px',
-                                height: '32px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}>
-                                <Utensils size={18} color="black" />
+                            <Logo style={{ color: '#ffcc00', width: '30px', height: '30px' }} />
+                            <div style={{ display: 'flex', gap: '4px', alignItems: 'baseline' }}>
+                                <span style={{ fontSize: '1.2rem', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.3px' }}>Latager</span>
+                                <span style={{ fontSize: '1.1rem', fontWeight: '800', color: 'rgba(255,255,255,0.4)', letterSpacing: '-0.3px' }}>Códigos</span>
                             </div>
-                            <span style={{
-                                fontSize: '20px',
-                                fontWeight: 700,
-                                letterSpacing: '-0.03em',
-                                color: '#ffffff'
-                            }}>LaTaGer</span>
                         </Link>
 
                         <nav className="nav-links desktop-only" style={{ display: 'flex', gap: '24px' }}>
